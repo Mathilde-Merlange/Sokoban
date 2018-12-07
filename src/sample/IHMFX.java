@@ -32,18 +32,19 @@ public class IHMFX extends Application implements Observateur {
 
         Scene scene = monteurScene.
                 setCentre(vue.gridPane).
-                ajoutBas(controleurIHMFX.depH).
+               /* ajoutBas(controleurIHMFX.depH).
                 ajoutBas(controleurIHMFX.depB).
                 ajoutBas(controleurIHMFX.depG).
-                ajoutBas(controleurIHMFX.depD).
+                ajoutBas(controleurIHMFX.depD).*/
                 setLargeur(800).
-                setHauteur(200).
+                setHauteur(800).
                 retourneScene();
 
         primaryStage.setScene(scene);
 
         primaryStage.setTitle("Sokoban");
         primaryStage.show();
+        vue.gridPane.requestFocus();
     }
 
     public void lance() {
