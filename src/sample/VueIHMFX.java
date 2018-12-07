@@ -37,19 +37,25 @@ public class VueIHMFX {
 
     public VueIHMFX(Controleur controleur) throws FileNotFoundException {
         commandeGetEtat = controleur.commandeGetEtat();
-        myButton = new Button[commandeGetEtat.exec().length];
+        /*myButton = new Button[commandeGetEtat.exec().length];
         for (int i = 0; i < commandeGetEtat.exec().length; i++) {
-            myButton[i] = new Button();
-            myButton[i].setMinSize(80, 80);
-            gridPane.add(myButton[i], i, 0);
-        }
+            for (int j = 0; j < commandeGetEtat.exec()[0].length; j++) {
+                myButton[i] = new Button();
+                myButton[i].setMinSize(80, 80);
+                gridPane.add(myButton[i], i, j);
+            }
+        }*/
+        dessine();
     }
 
     public void dessine() {
-        for (int i = 0; i < commandeGetEtat.exec().length; i++) {
-            myButton[i].setGraphic(new ImageView(soko[0]));
+        int [][] etat = commandeGetEtat.exec();
+        for (int i = 0; i < etat.length; i++)
+            for (int j = 0; j < etat[0].length; j++)
+                gridPane.add(new ImageView(soko[etat[i][j]]), i, j);
 
-            }
 
-        }
     }
+
+}
+

@@ -3,67 +3,35 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 public class ControleurIHMFX {
     Controleur controleur;
     VueIHMFX vue;
-    Button depH;
-    Button depB;
-    Button depG;
-    Button depD;
 
     ControleurIHMFX(Controleur controleur, VueIHMFX vue) {
         this.controleur = controleur;
         this.vue = vue;
-
-        for (int i=0; i<vue.myButton.length;i++)
-            vue.myButton[i].setOnAction(new MyAction(i));
-
-        depH = new Button("haut");
-        depB = new Button("bas");
-        depG = new Button("gauche");
-        depD = new Button("droite");
-
-        depH.setOnAction(new ActionHaut());
-        depB.setOnAction(new ActionBas());
-        depG.setOnAction(new ActionGauche());
-        depD.setOnAction(new ActionDroite());
+        vue.gridPane.setOnKeyPressed(new MyAction());
+        vue.gridPane.requestFocus();
     }
 
-    class ActionHaut implements EventHandler<ActionEvent> {
-        public void handle(ActionEvent event) {
-            controleur.move(8);
-        }
-    }
-
-    class ActionBas implements EventHandler<ActionEvent> {
-        public void handle(ActionEvent event) {
-            controleur.move(2);
-        }
-    }
-
-    class ActionGauche implements EventHandler<ActionEvent> {
-        public void handle(ActionEvent event) {
-            controleur.move(4);
-        }
-    }
-
-    class ActionDroite implements EventHandler<ActionEvent> {
-        public void handle(ActionEvent event) {
-            controleur.move(6);
-        }
-    }
-
-    class MyAction implements EventHandler<ActionEvent> {
-        int indice;
-
-        MyAction(int indice) {
-            this.indice = indice;
-        }
+    class MyAction implements EventHandler<KeyEvent> {
 
         @Override
-        public void handle(ActionEvent event) {
-            controleur.move(indice);
+        public void handle(KeyEvent event) {
+
+            KeyCode input = event.getCode();
+            if (input.equals(KeyCode.LEFT)) {
+                controleur.move(4);
+            } else if (input.equals(KeyCode.RIGHT)) {
+                controleur.move(6);
+            } else if (input.equals(KeyCode.UP)) {
+                controleur.move(8);
+            } else if (input.equals(KeyCode.DOWN)) {
+                controleur.move(2);
+            }
         }
     }
 }
