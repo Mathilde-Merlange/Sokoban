@@ -14,25 +14,31 @@ public class VueIHMFX {
     Button[] myButton;
     GridPane gridPane = new GridPane();
 
-    Image[] soko = new Image[]{new Image(new FileInputStream(
-            "caisse1.png"), 64, 64, false, false),
-            new Image(new FileInputStream(
-                    "caisse2.png"), 64, 64, false, false),
-            new Image(new FileInputStream(
-                    "destination.png"), 32, 32, false, false),
+    Image[] soko = new Image[]{
             new Image(new FileInputStream(
                     "mur.png"), 64, 64, false, false),
             new Image(new FileInputStream(
-                    "sol.png"), 64, 64, false, false),
+            "caisse1.png"), 64, 64, false, false),
+            new Image(new FileInputStream(
+                    "destination.png"), 32, 32, false, false),
+            new Image(new FileInputStream(
+                    "caisse2.png"), 64, 64, false, false),
             new Image(new FileInputStream(
                     "sokoB.png"), 37, 59, false, false),
+            new Image(new FileInputStream(
+                    "sol.png"), 64, 64, false, false),
             new Image(new FileInputStream(
                     "sokoD.png"), 42, 59, false, false),
             new Image(new FileInputStream(
                     "sokoG.png"), 42, 59, false, false),
             new Image(new FileInputStream(
                     "sokoH.png"), 37, 60, false, false)
+
     };
+
+    Image blanc = new Image(new FileInputStream("blanc.png"),
+                    80, 80,
+                    false, false);
 
 
     public VueIHMFX(Controleur controleur) throws FileNotFoundException {
@@ -48,13 +54,26 @@ public class VueIHMFX {
         dessine();
     }
 
+    public void grille(){
+        for (int j = 0; j < commandeGetEtat.exec()[0].length; j++){
+            for (int i = 0; i < commandeGetEtat.exec().length; i++){
+                System.out.print(commandeGetEtat.exec()[i][j]);
+          }
+            System.out.println();
+      }
+
+    }
+
     public void dessine() {
-        int [][] etat = commandeGetEtat.exec();
-        for (int i = 0; i < etat.length; i++)
-            for (int j = 0; j < etat[0].length; j++)
+        int[][] etat = commandeGetEtat.exec();
+        for (int i = 0; i < etat.length; i++) {
+            for (int j = 0; j < etat[0].length; j++) {
+                gridPane.add(new ImageView(blanc), i, j);
                 gridPane.add(new ImageView(soko[etat[i][j]]), i, j);
 
-
+                grille();
+            }
+        }
     }
 
 }
