@@ -71,9 +71,10 @@ public class VueIHMFX {
                 gridPane.add(new ImageView(blanc), i, j);
                 gridPane.add(new ImageView(soko[etat[i][j]]), i, j);
 
-                grille();
+
             }
         }
+        grille();
     }
 
 }

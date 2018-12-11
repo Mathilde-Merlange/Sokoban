@@ -23,7 +23,6 @@ public class ControleurIHMFX {
         public void handle(KeyEvent event) {
 
             KeyCode input = event.getCode();
-            System.out.println("hey!!");
             if (input.equals(KeyCode.LEFT)) {
                 System.out.println("LEFT");
                 controleur.move(4);

@@ -70,25 +70,12 @@ public class ModeleConcret implements Modele {
             case 0:
                 System.out.println("You shall not pass");
                 break;
-            case 1:
-                System.out.println("CAISSE 1!!");
-                System.out.println(" u : "+t[0]);
-                System.out.println(" v : "+t[1]);
+            case 1: case 3:
                 t=convI(indice, u, v);
-                System.out.println(" u : "+t[0]);
-                System.out.println(" v : "+t[1]);
-                switchvar(t[0], t[1], x, y); // caisse VS sol
-                switchvar(x, y, px, py); // sol VS soko
-                posx = x;
-                posy = y;
-                break;
-            case 3:
-                System.out.println("CAISSE 3 !!");
-                System.out.println(" u : "+t[0]);
-                System.out.println(" v : "+t[1]);
-                t=convI(indice, u, v);
-                System.out.println(" u : "+t[0]);
-                System.out.println(" v : "+t[1]);
+                if(etat[t[0]][t[1]]==0){
+                    System.out.println("do NOT move");
+                    break;
+                }
                 switchvar(t[0], t[1], x, y); // caisse VS sol
                 switchvar(x, y, px, py); // sol VS soko
                 posx = x;
@@ -103,11 +90,11 @@ public class ModeleConcret implements Modele {
     }
 
     public void switchvar(int x, int y, int px, int py) {
-        int a, b;
-        a = etat[x][y];
-        b = etat[px][py];
-        etat[x][y] = b;
-        etat[px][py] = a;
+            int a, b;
+            a = etat[x][y];
+            b = etat[px][py];
+            etat[x][y] = b;
+            etat[px][py] = a;
     }
 
     @Override
