@@ -1,5 +1,8 @@
 package sample;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ModeleConcret implements Modele {
 
 
@@ -15,6 +18,14 @@ public class ModeleConcret implements Modele {
     public int[][] etat = {{0, 0, 0, 0, 0}, {0, 5, 5, 5, 0}, {0, 5, 1, 5, 0}, {0, 5, 4, 5, 0}, {0, 0, 0, 0, 0}};
     int posx = 3; // abscisse soko
     int posy = 2; // ordonnée soko
+
+    int nbM=0; // nb dép soko
+    int nbC=0; // nb dép caisse
+    /*
+    * int valeur du déplacement (2,4,6,8)
+    * -int = dép caisse
+     */
+    ArrayList stock = new ArrayList();
 
     public void move(int indice) {
         int x, y;
@@ -40,6 +51,9 @@ public class ModeleConcret implements Modele {
                 echanger(x, y, posx, posy, indice);
                 break;
         }
+        System.out.println("nbc = "+nbC);
+        System.out.println("nbm = "+nbM);
+        for (int i=0; i<stock.size();i++) System.out.println("stock "+i +" :" + stock.get(i));
     }
 
     public int[] convI(int indice, int u, int v) {
@@ -80,11 +94,17 @@ public class ModeleConcret implements Modele {
                 switchvar(x, y, px, py); // sol VS soko
                 posx = x;
                 posy = y;
+                nbC+=1;
+                nbM+=1;
+                stock.add(indice);
+                stock.add(-indice);
                 break;
             default:
                 switchvar(x, y, px, py);
                 posx = x;
                 posy = y;
+                nbM+=1;
+                stock.add(indice);
                 break;
         }
     }
@@ -95,6 +115,7 @@ public class ModeleConcret implements Modele {
             b = etat[px][py];
             etat[x][y] = b;
             etat[px][py] = a;
+
     }
 
     @Override
