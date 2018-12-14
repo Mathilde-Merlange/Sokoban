@@ -15,10 +15,10 @@ public class ModeleConcret implements Modele {
      * 5 : sol ( )  soko[5]
      * 6 : soko (@)  soko[4]
      */
-    public int[][] etat = {{0, 0, 0, 0, 0}, {0, 5, 5, 5, 0}, {0, 5, 1, 5, 0}, {0, 5, 4, 5, 0}, {0, 0, 0, 0, 0}};
+    public int[][] etat = {{0, 0, 0, 0, 0}, {0, 5, 2, 5, 0}, {0, 5, 1, 5, 0}, {0, 5, 4, 5, 0}, {0, 0, 0, 0, 0}};
     int posx = 3; // abscisse soko
     int posy = 2; // ordonnée soko
-
+    int caissesRestantes=1;
     int nbM=0; // nb dép soko
     int nbC=0; // nb dép caisse
     /*
@@ -88,6 +88,17 @@ public class ModeleConcret implements Modele {
                 t=convI(indice, u, v);
                 if(etat[t[0]][t[1]]==0){
                     System.out.println("do NOT move");
+                    break;
+                }
+                t=convI(indice, u, v);
+                if(etat[t[0]][t[1]]==2){
+                    etat[t[0]][t[1]]=3;
+                    etat[x][y]=5;
+                    switchvar(x, y, px, py);
+                    caissesRestantes-=1;
+                    if (caissesRestantes==0){
+                        System.out.println("VICTOIRE !!!!");
+                    }
                     break;
                 }
                 switchvar(t[0], t[1], x, y); // caisse VS sol
